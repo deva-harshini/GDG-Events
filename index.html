@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GDG Events</title>
+  <style>
+    body {
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background: #fff;
+      color: #111;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      text-align: center;
+      padding: 40px 20px;
+      border-bottom: 1px solid #e5e5e5;
+    }
+    header h1 {
+      font-size: 2.8rem;
+      margin-bottom: 10px;
+    }
+    header p {
+      font-size: 1.1rem;
+      color: #555;
+    }
+    .container {
+      max-width: 1200px;
+      margin: auto;
+      padding: 30px 20px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 25px;
+    }
+    .card {
+      background: #fff;
+      border: 1px solid #e5e5e5;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      transition: all 0.2s;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+    }
+    .card h2 {
+      font-size: 1.4rem;
+      margin-bottom: 8px;
+    }
+    .summary {
+      font-size: 0.95rem;
+      color: #444;
+      margin-bottom: 12px;
+    }
+    .info {
+      font-size: 0.9rem;
+      color: #666;
+      margin: 4px 0;
+    }
+    .info span {
+      margin-right: 8px;
+    }
+    .btn {
+      display: inline-block;
+      padding: 10px 18px;
+      background: #000;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      font-size: 0.95rem;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: background 0.2s;
+    }
+    .btn:hover {
+      background: #333;
+    }
+    .event-details {
+      max-width: 800px;
+      margin: auto;
+      background: #fff;
+      border-radius: 12px;
+      padding: 30px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    }
+    .event-details h2 {
+      font-size: 2rem;
+      margin-bottom: 10px;
+    }
+    .event-details p {
+      margin-bottom: 15px;
+      line-height: 1.6;
+    }
+    .hidden {
+      display: none;
+    }
+    .back-btn {
+      margin-bottom: 20px;
+      background: #555;
+    }
+    input {
+      display: block;
+      margin: 12px 0;
+      padding: 12px;
+      width: 100%;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Upcoming GDG Events</h1>
+    <p>Join our upcoming developer conferences, workshops, and meetups</p>
+  </header>
+  <div class="container">
+    <div id="event-list" class="grid"></div>
+    <div id="event-details" class="hidden"></div>
+  </div>
+
+  <script>
+    const events = [
+      {
+        title: "GDG DevFest 2025",
+        date: "October 15, 2025",
+        location: "Visakhapatnam, India",
+        summary: "A full-day developer festival with talks, workshops, and networking opportunities.",
+        description: "DevFest brings together developers from all over the region. Expect a full-day experience filled with keynote sessions, codelabs, networking, and amazing community spirit.",
+      },
+      {
+        title: "Women Techmakers Meetup",
+        date: "November 5, 2025",
+        location: "Hyderabad, India",
+        summary: "Celebrating women in technology with talks, mentorship, and community building.",
+        description: "A platform to celebrate women in technology with inspiring talks, mentorship, workshops, and community building activities to empower women in tech.",
+      },
+      {
+        title: "Cloud Study Jam",
+        date: "December 12, 2025",
+        location: "Online Event",
+        summary: "Hands-on Google Cloud training to explore cloud, AI, and DevOps tools.",
+        description: "Hands-on session with Google Cloud experts to explore cloud computing, AI models, and DevOps tools. Bring your laptop and learn by doing!",
+      },
+      {
+        title: "Android Compose Camp",
+        date: "January 20, 2026",
+        location: "Bangalore, India",
+        summary: "Learn Jetpack Compose to build modern Android UIs interactively.",
+        description: "Learn Jetpack Compose and modern Android app development in this interactive coding bootcamp designed for both beginners and pros.",
+      },
+      {
+        title: "Hack the Web",
+        date: "February 10, 2026",
+        location: "Chennai, India",
+        summary: "A 24-hour hackathon for building next-gen web apps.",
+        description: "A 24-hour hackathon for building the next generation of web apps. Compete, learn, and showcase your creativity.",
+      },
+      {
+        title: "AI & ML Bootcamp",
+        date: "March 15, 2026",
+        location: "Delhi, India",
+        summary: "Deep dive into AI with neural networks, transformers, and agents.",
+        description: "Deep dive into neural networks, transformers, and AI agents with hands-on coding labs and real-world applications.",
+      },
+      {
+        title: "Kubernetes Crash Course",
+        date: "April 2, 2026",
+        location: "Online",
+        summary: "Master container orchestration and DevOps workflows.",
+        description: "Master container orchestration and DevOps workflows with Kubernetes. Learn deployment, scaling, and cloud-native design.",
+      },
+      {
+        title: "GDG Lightning Talks",
+        date: "May 12, 2026",
+        location: "Pune, India",
+        summary: "Fast-paced talks from the community on latest tech trends.",
+        description: "A series of lightning talks from the community on emerging technologies, developer tools, and success stories.",
+      },
+      {
+        title: "Flutter Festival",
+        date: "June 5, 2026",
+        location: "Mumbai, India",
+        summary: "All about Flutter: mobile, web, and desktop apps.",
+        description: "Everything Flutter — from mobile apps to web and desktop. Codelabs, workshops, and demos for cross-platform development.",
+      },
+      {
+        title: "Next Gen Dev Meetup",
+        date: "July 8, 2026",
+        location: "Kolkata, India",
+        summary: "Discuss Web3, AI, AR/VR, and the future of development.",
+        description: "An informal community meetup discussing the latest trends in Web3, AI, AR/VR, and future of development.",
+      },
+      {
+        title: "GDG Cloud Summit",
+        date: "August 21, 2026",
+        location: "Hyderabad, India",
+        summary: "Cloud-first conference with industry experts and demos.",
+        description: "An immersive summit with cloud experts, showcasing case studies, demos, and networking opportunities for professionals and students.",
+      },
+      {
+        title: "DevOps & Security Conclave",
+        date: "September 18, 2026",
+        location: "Bangalore, India",
+        summary: "Conference on DevOps, security, and modern infrastructure.",
+        description: "A one-day conclave focusing on security practices, DevSecOps, automation pipelines, and best practices for modern infrastructure.",
+      }
+    ];
+
+    const eventList = document.getElementById("event-list");
+    const eventDetails = document.getElementById("event-details");
+
+    // Render event cards
+    events.forEach((event, index) => {
+      const card = document.createElement("div");
+      card.className = "card";
+      card.innerHTML = `
+        <h2>${event.title}</h2>
+        <p class="summary">${event.summary}</p>
+        <p class="info">📅 ${event.date}</p>
+        <p class="info">📍 ${event.location}</p>
+        <button class="btn" onclick="showEventDetails(${index})">Register</button>
+      `;
+      eventList.appendChild(card);
+    });
+
+    function showEventDetails(index) {
+      const event = events[index];
+      eventList.classList.add("hidden");
+      eventDetails.classList.remove("hidden");
+      eventDetails.innerHTML = `
+        <button class="btn back-btn" onclick="goBack()">← Back to Events</button>
+        <div class="event-details">
+          <h2>${event.title}</h2>
+          <p><strong>Date:</strong> ${event.date}</p>
+          <p><strong>Venue:</strong> ${event.location}</p>
+          <p><strong>About:</strong> ${event.description}</p>
+
+          <h3>Register Now</h3>
+          <form onsubmit="register(event)">
+            <input type="text" id="name" placeholder="Your Name" required />
+            <input type="email" id="email" placeholder="Your Email" required />
+            <button class="btn" type="submit">Register</button>
+          </form>
+          <div id="success-msg" style="color: green; margin-top: 10px;"></div>
+        </div>
+      `;
+    }
+
+    function goBack() {
+      eventDetails.classList.add("hidden");
+      eventList.classList.remove("hidden");
+    }
+
+    function register(e) {
+      e.preventDefault();
+      const name = document.getElementById("name").value;
+      const email = document.getElementById("email").value;
+      const successMsg = document.getElementById("success-msg");
+
+      if (
+        email.endsWith("@gmail.com") ||
+        email.endsWith("@gitam.in") ||
+        email.endsWith("@gitam.edu")
+      ) {
+        successMsg.innerText = `🎉 Thank you ${name}, you have successfully registered!`;
+      } else {
+        successMsg.innerText = "❌ Please use a valid email (@gmail.com, @gitam.in, @gitam.edu)";
+      }
+    }
+  </script>
+</body>
+</html>
