@@ -26,7 +26,7 @@ A simple and responsive web application to showcase upcoming **Google Developer 
 ## 🔧 Installation & Usage  
 1. Clone the repository:  
 
-   git clone https://github.com/dev-harshini/gdg-events-webapp.git
+   git clone https://github.com/deva-harshini/gdg-events-webapp.git
    cd gdg-events-webapp
 
 
