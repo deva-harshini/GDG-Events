@@ -2,9 +2,6 @@
 
 A simple and responsive web application to showcase upcoming **Google Developer Groups (GDG) events**. Users can explore event details and register using a clean, interactive interface.  
 
-## 🎥 Demo  
-[Watch Demo Video](https://drive.google.com/file/d/19W0lFgkEOG6pZfHWqt0OQX6RALEPEzW_/view?usp=sharing) 
-
 ## 🚀 Features  
 - 📅 **Dynamic Event Listing** – Upcoming events displayed as interactive cards  
 - 📝 **Event Details Page** – Shows description, date, and venue  
@@ -33,6 +30,12 @@ A simple and responsive web application to showcase upcoming **Google Developer 
 Open index.html in any modern browser.
 
 Explore events and test the registration feature.
+
+## 🎥 Demo  
+[Watch Demo Video](https://drive.google.com/file/d/19W0lFgkEOG6pZfHWqt0OQX6RALEPEzW_/view?usp=sharing) 
+
+## Live site
+[GDG Events](https://deva-harshini.github.io/GDG-Events/)
 
 ## 📝 Registration Rules
 
